@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+        xmlns:s="library://ns.adobe.com/flex/spark" title="Discussion">
+    <s:layout>
+        <s:VerticalLayout/>
+    </s:layout>
+    
+    <fx:Script>
+    <![CDATA[
+        import controller.client.events.UserDiscussionEvent;
+        private var _message:String;
+        private var _messageChanged:Boolean;
+        
+        public function get message():String
+        {
+            return _message;
+        }
+
+        public function set message(value:String):void
+        {
+            _message = value;
+            _messageChanged = true;
+            invalidateProperties();
+        }
+        
+        override protected function commitProperties():void
+        {
+            if (_messageChanged)
+            {
+                messageLabel.text = message;
+                _messageChanged = false;
+            }
+            super.commitProperties();
+        }
+
+        protected function button1_clickHandler(event:MouseEvent):void
+        {
+            var type:String = event.type == MouseEvent.MOUSE_DOWN ? 
+                UserDiscussionEvent.REQUEST_TO_SPEAK : UserDiscussionEvent.RELINQUISH_TURN;
+            dispatchEvent(new UserDiscussionEvent(type));
+        }
+        
+    ]]>
+    </fx:Script>
+    <s:Group width="100%">
+        <s:Rect width="100%" height="100%">
+            <s:fill>
+                <s:SolidColor color="0xAA2AFF"/>
+            </s:fill>
+        </s:Rect>
+        <s:Label id="messageLabel" top="10" left="10" bottom="10" right="10" maxDisplayedLines="-1"/>
+    </s:Group>
+    <s:Button width="100%" height="100%" label="My Turn" mouseDown="button1_clickHandler(event)" mouseUp="button1_clickHandler(event)" fontSize="48"/>
+</s:View>
+    

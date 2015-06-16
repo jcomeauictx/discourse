@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark" title="Home Page">
+    <s:layout>
+        <s:VerticalLayout gap="10" paddingTop="10"/>
+    </s:layout>
+    
+    <fx:Script>
+    <![CDATA[
+        import controller.client.events.UserDiscussionEvent;
+        private var _showStartServer:Boolean;
+        private var _showStartServerChanged:Boolean;
+        
+        
+        public function get showStartServer():Boolean
+        {
+            return _showStartServer;
+        }
+        
+        public function set showStartServer(value:Boolean):void
+        {
+            _showStartServer = value;
+            _showStartServerChanged = true;
+            invalidateProperties();
+        }
+        
+        protected function button1_clickHandler(event:MouseEvent):void
+        {
+            dispatchEvent(new UserDiscussionEvent(UserDiscussionEvent.START_SERVER_REQUESTED));
+        }
+        
+        protected function button2_clickHandler(event:MouseEvent):void
+        {
+            dispatchEvent(new UserDiscussionEvent(UserDiscussionEvent.CONNECT_TO_SERVER));
+        }
+        
+        public function get userName():String
+        {
+            return userNameInput ? userNameInput.text : "";
+        }
+        
+        override protected function commitProperties():void
+        {
+            if (_showStartServerChanged)
+            {
+                startServer.visible = startServer.includeInLayout = showStartServer;
+                _showStartServerChanged = false;
+            }
+            super.commitProperties();
+        }
+        
+    ]]>
+    </fx:Script>
+    <s:Group  id="startServer">
+        <s:Button left="10" label="Start Server" click="button1_clickHandler(event)"/>
+    </s:Group>
+    <s:HGroup verticalAlign="middle" width="100%" paddingRight="10" paddingLeft="10">
+        <s:Label text="Name:"/>
+        <s:TextInput id="userNameInput" width="100%"/>
+    </s:HGroup>
+    <s:Button width="100%" enabled="{userNameInput.text != ''}" height="100%" label="Connect" click="button2_clickHandler(event)" fontSize="48"/>
+</s:View>

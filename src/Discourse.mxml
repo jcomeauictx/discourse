@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TabbedViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+								  xmlns:s="library://ns.adobe.com/flex/spark" applicationDPI="160">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.components.Alert;
+			private var server:ServerSocket;
+			private var socket:Socket;
+			private var beep:Sound = new Sound(new URLRequest('resources/sounds/beep.mp3'));
+			
+			protected function viewnavigator1_creationCompleteHandler(event:FlexEvent):void
+			{
+			}
+			
+			protected function onConnect(event:ServerSocketConnectEvent):void
+			{
+				beep.play();
+				Alert.show(event.socket.localAddress + " just connected");
+			}
+			
+			protected function onRequestConnect(event:MouseEvent):void
+			{
+				socket = new Socket();
+				socket.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+				socket.connect("192.168.43.1", 7934); 
+			}
+			
+			protected function onRequestStartServer(event:MouseEvent):void
+			{
+				server = new ServerSocket();
+				server.addEventListener(Event.CONNECT, onConnect);
+				server.bind(7934); // this is the number of the port where your socket communicate
+				server.listen();
+				Alert.show("Server started");
+			}
+			
+			protected function ioErrorHandler(event:IOErrorEvent):void
+			{
+				trace("ioErrorHandler: " + event);
+			}
+			
+		]]>
+	</fx:Script>
+	<s:ViewNavigator title="Hello" creationComplete="viewnavigator1_creationCompleteHandler(event)">
+		<s:actionLayout>
+			<s:VerticalLayout/>
+		</s:actionLayout>
+		<s:actionContent>
+			<s:Button label="Start server" click="onRequestStartServer(event)"/>
+			<s:Button label="Connect" click="onRequestConnect(event)"/>
+		</s:actionContent>
+	</s:ViewNavigator>
+</s:TabbedViewNavigatorApplication>
