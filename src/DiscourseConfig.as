@@ -4,6 +4,7 @@ package
     
     import controller.client.ClientMessageReceivedCommand;
     import controller.client.ConnectToServerCommand;
+    import controller.client.LoggedOutCommand;
     import controller.client.MessageSendRequestedCommand;
     import controller.client.ServerMessageReceivedCommand;
     import controller.client.UserRegisteredCommand;
@@ -13,6 +14,7 @@ package
     import controller.common.events.clienttoserver.DiscussionViewEvent;
     import controller.common.events.clienttoserver.LoginEvent;
     import controller.common.events.servertoclient.ConnectionEvent;
+    import controller.server.CallItADayCommand;
     import controller.server.DiscussionIdleCommand;
     import controller.server.DiscussionOverCommand;
     import controller.server.DiscussionParametersEditedCommand;
@@ -20,6 +22,7 @@ package
     import controller.server.ModestFirstResetStrategy;
     import controller.server.ModestFirstStrategy;
     import controller.server.RequestOrRelinquishTurnCommand;
+    import controller.server.StartOverCommand;
     import controller.server.StartServerCommand;
     import controller.server.UserTurnCommand;
     import controller.server.events.ClockEvent;
@@ -72,6 +75,7 @@ package
             commandMap.map(UserDiscussionEvent.CONNECT_TO_SERVER, UserDiscussionEvent).toCommand(ConnectToServerCommand);
             commandMap.map(MessageToServerEvent.MESSAGE_SEND_REQUESTED, MessageToServerEvent).toCommand(MessageSendRequestedCommand);
             commandMap.map(ConnectionEvent.USER_REGISTERED, ConnectionEvent).toCommand(UserRegisteredCommand);
+            commandMap.map(ConnectionEvent.LOGGED_OUT, ConnectionEvent).toCommand(LoggedOutCommand);
             // server commands
             // UserDiscussionEvent is a client side event but it can serve for turning a client into a server
             commandMap.map(UserDiscussionEvent.START_SERVER, UserDiscussionEvent).toCommand(StartServerCommand);
@@ -81,6 +85,8 @@ package
             commandMap.map(DiscussionEvent.DISCUSSION_OVER, DiscussionEvent).toCommand(DiscussionOverCommand);
             commandMap.map(DiscussionViewEvent.RELINQUISH_TURN, DiscussionViewEvent).toCommand(RequestOrRelinquishTurnCommand);
             commandMap.map(DiscussionViewEvent.REQUEST_TO_SPEAK, DiscussionViewEvent).toCommand(RequestOrRelinquishTurnCommand);
+            commandMap.map(DiscussionViewEvent.CALL_IT_A_DAY, DiscussionViewEvent).toCommand(CallItADayCommand);
+            commandMap.map(DiscussionViewEvent.START_OVER, DiscussionViewEvent).toCommand(StartOverCommand);
             commandMap.map(UserEvent.TURN_ACCEPTED, UserEvent).toCommand(UserTurnCommand);
             commandMap.map(LoginEvent.LOGIN, LoginEvent).toCommand(LoginCommand);
             commandMap.map(DiscussionParametersEvent.EDITED, DiscussionParametersEvent).toCommand(DiscussionParametersEditedCommand);

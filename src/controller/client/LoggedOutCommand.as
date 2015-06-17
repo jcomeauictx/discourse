@@ -4,14 +4,14 @@ package controller.client
 	
 	import service.client.Messenger;
 	
-	public class ConnectToServerCommand implements ICommand
+	public class LoggedOutCommand implements ICommand
 	{
         [Inject]
         public var messenger:Messenger;
         
 		public function execute():void
 		{
-            messenger.connect("192.168.43.1", 7934);
+            messenger.reset();
 		}
 		
 	}

@@ -9,6 +9,8 @@ package controller.common.events.clienttoserver
     {
         public static const REQUEST_TO_SPEAK:String = "REQUEST_TO_SPEAK";
         public static const RELINQUISH_TURN:String = "RELINQUISH_TURN";
+        public static const START_OVER:String = "START_OVER";
+        public static const CALL_IT_A_DAY:String = "CALL_IT_A_DAY";
         
         public function DiscussionViewEvent(type:String, eventData:EventData, bubbles:Boolean=false, cancelable:Boolean=false)
         {

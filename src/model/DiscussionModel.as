@@ -99,7 +99,12 @@ package model
 		
         public function reset():void
         {
-            // TODO Auto Generated method stub
+            for (var key:String in members)
+            {
+                delete members[key];
+            }
+            currentSpeakerName = null;
+            hasBegun = false;
         }
     }
 }

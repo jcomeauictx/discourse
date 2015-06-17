@@ -2,6 +2,9 @@ package view
 {
     import flash.media.Sound;
     import flash.net.URLRequest;
+    import flash.net.sendToURL;
+    
+    import mx.events.CloseEvent;
     
     import spark.components.Alert;
     
@@ -70,10 +73,17 @@ package view
         
         private function onDiscussionOver(e:DiscussionStateEvent):void
         {
-            Alert.show("Discussion is over.");
             discussionView.message = "";
+            Alert.show("Do you want to start a new discussion?", "Discussion Over", Alert.YES | Alert.NO, null, alertCloseHandler); 
         }
-        
+
+        private function alertCloseHandler(e:CloseEvent):void
+        {
+            var eventType:String = e.detail == Alert.YES ? 
+                DiscussionViewEvent.START_OVER : DiscussionViewEvent.CALL_IT_A_DAY;
+            dispatchMessage(eventType);
+        }
+
         private function onDiscussionIdle(e:DiscussionStateEvent):void
         {
             discussionView.message = "Waiting for new speaker.";

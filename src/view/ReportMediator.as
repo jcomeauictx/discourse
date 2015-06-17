@@ -1,7 +1,6 @@
 package view
 {
     import mx.collections.ArrayCollection;
-    import mx.formatters.DateFormatter;
     
     import spark.formatters.DateTimeFormatter;
     

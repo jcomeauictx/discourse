@@ -2,13 +2,11 @@ package service.server
 {
     import flash.utils.Dictionary;
     
-    import base.BaseActor;
-    
     import controller.client.events.MessageToServerEvent;
     
     import model.User;
     
-    public class UserFetcher extends BaseActor
+    public class UserFetcher
     {
         private var dictionary:Dictionary = new Dictionary();
         
@@ -35,6 +33,14 @@ package service.server
         public function removeUser(connectionId:int):void
         {
             delete dictionary[connectionId];
+        }
+        
+        public function reset():void
+        {
+            for (var key:String in dictionary)
+            {
+                delete dictionary[key];
+            }
         }
     }
 }

@@ -10,8 +10,6 @@ package service.server
     import flash.utils.Dictionary;
     import flash.utils.setTimeout;
     
-    import spark.components.Alert;
-    
     import base.BaseActor;
     
     import controller.client.events.MessengerEvent;

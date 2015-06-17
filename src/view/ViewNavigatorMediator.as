@@ -22,9 +22,16 @@ package view
         override public function initialize():void
         {
             addContextListener(ConnectionEvent.LOGGED_IN, onUserLoggedIn);
+            addContextListener(ConnectionEvent.LOGGED_OUT, onUserLoggedOut);
             addContextListener(UserDiscussionEvent.START_SERVER_REQUESTED, onStartServerRequested);
             addContextListener(DiscussionParametersEvent.EDITED, onEdited);
             addContextListener(DiscussionStateEvent.DISCUSSION_OVER, onDiscussionOver);
+            addContextListener(DiscussionStateEvent.DISCUSSION_RESTARTED, onDiscussionRestarted);
+        }
+        
+        private function onDiscussionRestarted(e:DiscussionStateEvent):void
+        {
+            viewInstance.popView();
         }
         
         private function onDiscussionOver(e:DiscussionStateEvent):void
@@ -47,5 +54,9 @@ package view
             viewInstance.pushView(Discussion);
         }
         
+        private function onUserLoggedOut(e:ConnectionEvent):void
+        {
+            viewInstance.popToFirstView();
+        }
     }
 }

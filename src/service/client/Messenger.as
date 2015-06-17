@@ -18,10 +18,8 @@ package service.client
         public function Messenger()
         {
             super();
-            socket = new Socket();
             NativeApplication.nativeApplication.executeInBackground = true; // make sure sockets don't die in ios sleep mode
-            socket.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-            socket.addEventListener(ProgressEvent.SOCKET_DATA, socketDataHandler);
+            reset();
         }
         
         protected function socketDataHandler(event:ProgressEvent):void
@@ -46,6 +44,19 @@ package service.client
         public function connect(host:String, port:int):void
         {
             socket.connect(host, port);
+        }
+        
+        public function reset():void
+        {
+            if (socket)
+            {
+                socket.removeEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+                socket.removeEventListener(ProgressEvent.SOCKET_DATA, socketDataHandler);
+            }
+            connectionId = NaN;
+            socket = new Socket();
+            socket.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler, false, 0, true);
+            socket.addEventListener(ProgressEvent.SOCKET_DATA, socketDataHandler, false, 0, true);
         }
                 
     }

@@ -8,6 +8,7 @@ package controller.common.events.servertoclient
     {
         public static const DISCUSSION_IDLE:String = "DISCUSSION_IDLE";
         public static const DISCUSSION_OVER:String = "DISCUSSION_OVER";
+        public static const DISCUSSION_RESTARTED:String = "DISCUSSION_RESTARTED";
         
         public function DiscussionStateEvent(type:String, discussionEventData:DiscussionStateEventData, bubbles:Boolean=false, cancelable:Boolean=false)
         {

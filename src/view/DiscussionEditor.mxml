@@ -21,12 +21,12 @@
         <s:HGroup width="100%" verticalAlign="middle">
             <s:Label text="Length of Turn (sec)"/>
             <s:Spacer width="100%"/>
-            <s:TextInput id="lengthOfTurn" restrict="0-9\." width="80" softKeyboardType="{SoftKeyboardType.NUMBER}"/>
+            <s:TextInput id="lengthOfTurn" text="1" restrict="0-9\." width="80" softKeyboardType="{SoftKeyboardType.NUMBER}"/>
         </s:HGroup>
         <s:HGroup width="100%" verticalAlign="middle">
             <s:Label text="Total Time (min)"/>
             <s:Spacer width="100%"/>
-            <s:TextInput id="totalTime" restrict="0-9\." width="80" softKeyboardType="{SoftKeyboardType.NUMBER}"/>
+            <s:TextInput id="totalTime" text=".1" restrict="0-9\." width="80" softKeyboardType="{SoftKeyboardType.NUMBER}"/>
         </s:HGroup>
         <s:Spacer height="30"/>
         <s:Button label="Submit" enabled="{lengthOfTurn.text &amp;&amp; totalTime.text}" click="submitHandler(event)" />
