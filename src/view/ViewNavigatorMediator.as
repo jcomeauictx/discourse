@@ -31,7 +31,8 @@ package view
         
         private function onDiscussionRestarted(e:DiscussionStateEvent):void
         {
-            viewInstance.popView();
+            viewInstance.popToFirstView();
+            viewInstance.pushView(Discussion);
         }
         
         private function onDiscussionOver(e:DiscussionStateEvent):void

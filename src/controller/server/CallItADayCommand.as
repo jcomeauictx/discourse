@@ -27,6 +27,7 @@ package controller.server
             server.broadCast(connectionEventData);
             discussionModel.reset();
             userFetcher.reset();
+            server.disconnect();
         }
         
     }

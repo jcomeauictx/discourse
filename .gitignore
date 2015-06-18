@@ -41,3 +41,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+bin-debug/DebugHostInfo.xml
+bin-debug/Discourse-app.xml
+bin-debug/Discourse2.swf
+bin-debug/Discourse.swf
+bin-debug/Discourse3-app.xml
+bin-debug/Discourse2-app.xml
+bin-debug/Discourse3.apk
+bin-debug/Discourse3.swf
+bin-debug/resources/sounds/tick.mp3
+bin-debug/resources/sounds/beep.mp3

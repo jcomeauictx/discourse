@@ -52,6 +52,7 @@ package service.client
             {
                 socket.removeEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
                 socket.removeEventListener(ProgressEvent.SOCKET_DATA, socketDataHandler);
+                socket.close();
             }
             connectionId = NaN;
             socket = new Socket();

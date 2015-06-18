@@ -20,8 +20,6 @@ package controller.server
         
         public function execute():void
         {
-            // change discussion state
-            discussion.reset();
             // relay message to clients
             var discussionStateEventData:DiscussionStateEventData = new DiscussionStateEventData();
             discussionStateEventData.eventType = DiscussionStateEvent.DISCUSSION_OVER;

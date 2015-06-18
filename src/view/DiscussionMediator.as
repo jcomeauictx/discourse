@@ -74,7 +74,7 @@ package view
         private function onDiscussionOver(e:DiscussionStateEvent):void
         {
             discussionView.message = "";
-            Alert.show("Do you want to start a new discussion?", "Discussion Over", Alert.YES | Alert.NO, null, alertCloseHandler); 
+            Alert.show("Do you want continue the discussion?", "Discussion Over", Alert.YES | Alert.NO, null, alertCloseHandler); 
         }
 
         private function alertCloseHandler(e:CloseEvent):void

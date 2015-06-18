@@ -1,7 +1,5 @@
 package controller.server
 {
-    import controller.common.events.servertoclient.ConnectionEvent;
-    import controller.common.events.servertoclient.ConnectionEventData;
     import controller.common.events.servertoclient.DiscussionStateEvent;
     import controller.common.events.servertoclient.DiscussionStateEventData;
     
@@ -23,7 +21,7 @@ package controller.server
         {
             var discussionStateEventData:DiscussionStateEventData = new DiscussionStateEventData();
             discussionStateEventData.eventType = DiscussionStateEvent.DISCUSSION_RESTARTED;
-            discussionModel.beganAt = new Date().time;
+            discussionModel.hasBegun = false;
             server.broadCast(discussionStateEventData);
         }
         

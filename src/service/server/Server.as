@@ -1,6 +1,7 @@
 package service.server
 {
     import flash.errors.IOError;
+    import flash.errors.MemoryError;
     import flash.events.Event;
     import flash.events.ProgressEvent;
     import flash.events.ServerSocketConnectEvent;
@@ -24,7 +25,8 @@ package service.server
 	public class Server extends BaseActor
 	{
         private var connectionId:int = 0;
-        private var server:ServerSocket;
+        private var _server:ServerSocket;
+        private var _isOn:Boolean = false;
         private var dictionary:Dictionary;
         
         [Inject]
@@ -32,21 +34,51 @@ package service.server
         
 		public function Server()
 		{
-            server = new ServerSocket();
             dictionary = new Dictionary();
 		}
         
+        public function get server():ServerSocket
+        {
+            if (!_server)
+            {
+                _server = new ServerSocket();
+            }
+            return _server;
+        }
+
+        public function set server(value:ServerSocket):void
+        {
+            _server = value;
+        }
+
         public function connect(port:int):void
         {
-            server.addEventListener(Event.CONNECT, onConnect);
-            server.bind(port);
-            server.listen();
+            server.addEventListener(Event.CONNECT, onConnect, false, 0, true);
+            if (!server.bound)
+            {
+                server.bind(port);
+            }
+            if (!server.listening)
+            {
+                server.listen();
+            }
+            _isOn = true;
             dispatch(new ServerEvent(ServerEvent.STARTED));
+        }
+        
+        public function disconnect():void
+        {
+            server.removeEventListener(Event.CONNECT, onConnect);
+            for (var key:String in dictionary)
+            {
+                delete dictionary[key];
+            }
+            _isOn = false;
         }
         
         public function get isOn():Boolean
         {
-            return server && server.listening;
+            return _isOn;
         }
         
         protected function onConnect(event:ServerSocketConnectEvent):void
