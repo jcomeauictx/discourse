@@ -42,6 +42,7 @@ package
     import robotlegs.bender.framework.api.IInjector;
     
     import service.client.Messenger;
+    import service.common.Persistence;
     import service.common.SocketHelper;
     import service.server.Server;
     import service.server.UserFetcher;
@@ -103,6 +104,7 @@ package
             injector.map(UserFetcher).asSingleton();
             injector.map(Clock).asSingleton();
             injector.map(SocketHelper).asSingleton();
+            injector.map(Persistence).asSingleton();
             // models
             var modestDiscussion:ModestDiscussion = new ModestDiscussion();
             injector.map(ModestDiscussion).toValue(modestDiscussion);
