@@ -12,10 +12,19 @@
         {
             var totalTimeValue:Number = Number(totalTimeInput.text);
             var lengthOfTurnValue:Number = Number(lengthOfTurnInput.text);
-            dispatchEvent(new DiscussionParametersEvent(DiscussionParametersEvent.EDITED, totalTimeValue, lengthOfTurnValue));
+            var discussionNameValue:String = discussionNameInput.text;
+            dispatchEvent(new DiscussionParametersEvent(DiscussionParametersEvent.EDITED, discussionNameValue, totalTimeValue, lengthOfTurnValue));
         }
         
         // in a mobile app using RL2 it's probably better to assume lifecycle is ok and not invalidateProperties()
+        public function set discussionName(value:String):void
+        {
+            if (discussionNameInput)
+            {
+                discussionNameInput.text = value;
+            }
+        }
+        
         public function set lengthOfTurn(value:Number):void
         {
             if (lengthOfTurnInput)
@@ -36,6 +45,11 @@
     </fx:Script>
     <s:VGroup verticalCenter="0" horizontalCenter="0" width="80%" height="80%" horizontalAlign="center">
         <s:HGroup width="100%" verticalAlign="middle">
+            <s:Label text="Discussion Name"/>
+            <s:Spacer width="100%"/>
+            <s:TextInput id="discussionNameInput" width="120"/>
+        </s:HGroup>
+        <s:HGroup width="100%" verticalAlign="middle">
             <s:Label text="Length of Turn (sec)"/>
             <s:Spacer width="100%"/>
             <s:TextInput id="lengthOfTurnInput" restrict="0-9\." width="80" softKeyboardType="{SoftKeyboardType.NUMBER}"/>
@@ -46,6 +60,6 @@
             <s:TextInput id="totalTimeInput" restrict="0-9\." width="80" softKeyboardType="{SoftKeyboardType.NUMBER}"/>
         </s:HGroup>
         <s:Spacer height="30"/>
-        <s:Button label="Submit" enabled="{lengthOfTurnInput.text &amp;&amp; totalTimeInput.text}" click="submitHandler(event)" />
+        <s:Button label="Submit" enabled="{discussionNameInput.text &amp;&amp; lengthOfTurnInput.text &amp;&amp; totalTimeInput.text}" click="submitHandler(event)" />
     </s:VGroup>
 </s:View>

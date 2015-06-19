@@ -20,6 +20,7 @@ package controller.server
         {
             discussion.discussionLength = discussionParametersEvent.totalTime;
             discussion.turnLength = discussionParametersEvent.turnLength;
+            discussion.name = discussionParametersEvent.discussionName;
             dispatch(new UserDiscussionEvent(UserDiscussionEvent.START_SERVER));
         }
         

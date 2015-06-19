@@ -8,10 +8,11 @@ package model
 	{
 		public static var EPSILON:Number = 500;
 		protected var members:Dictionary;
-		private var _discussionLength:Number=10*60*1000;
+		private var _discussionLength:Number;
 		private var _beganAt:Number;
-		private var _turnLength:Number=5*1000;
+		private var _turnLength:Number;
 		private var _currentSpeakerName:String;
+        public var name:String;
 		
 		public function DiscussionModel()
 		{
